@@ -13251,20 +13251,20 @@ $$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 
     <span class="c1">#       然后得到对前300个训练数据的预测结果</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="c1"># 获得程序开始时间</span>
     <span class="n">predictions_val</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-    <span class="n">predictions_train</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">300</span><span class="p">])</span>
+    <span class="n">predictions_train</span> <span class="o">=</span> <span class="n">learner</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">])</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="c1"># 获得程序结束时间</span>
     
     <span class="c1"># TODO：计算预测用时</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pred_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
             
     <span class="c1"># TODO：计算在最前面的300个训练数据的准确率</span>
-    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">300</span><span class="p">],</span> <span class="n">predictions_train</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="n">predictions_train</span><span class="p">)</span>
         
     <span class="c1"># TODO：计算在验证上的准确率</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">predictions_val</span><span class="p">)</span>
     
     <span class="c1"># TODO：计算在最前面300个训练数据上的F-score</span>
-    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbeta_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">300</span><span class="p">],</span> <span class="n">predictions_train</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbeta_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="n">predictions_train</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
         
     <span class="c1"># TODO：计算验证集上的F-score</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;f_val&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbeta_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">predictions_val</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
@@ -14169,7 +14169,7 @@ AAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>回答： </strong> Logistic回归通常都是用来解决二分类问题的，也可以用来进行多分类。其主要解决的是线性问题，针对该问题训练时，输入训练数据，每一条数据通过加权求和带入sigmoid函数，一个输入在[$-\infty, \infty$]，输出在[0,1]之间的S型函数，得到预测结果。因此预测值与真实值之间就存在一定的误差，通过调整不同特征的权重后，是该误差减小，直至不变，训练过程就完成了。</p>
+<p><strong>回答： </strong> Logistic回归通常都是用来解决二分类问题的，也可以用来进行多分类。其主要解决的是线性问题，针对该问题训练时，输入训练数据，每一条数据通过加权求和带入sigmoid函数，一个输入在[$-\infty, \infty$]，输出在[0,1]之间的S型函数，得到预测结果。因此预测值与真实值之间就存在一定的误差，通过随机梯度下降算法，更新不同特征的权重，使该误差减小，直至不变，训练过程就完成了。</p>
 <p>针对该问题预测时，输入一条数据，一共有103个特征，传入模型后，通过线性的加权求和后带入sigmoid函数。因此，输出的结果就是一个概率，来判断年收入是否大于\$50,000，输出大于0.5，则该调查者年收入大于\$50,000；反之。</p>
 
 </div>
@@ -14303,7 +14303,7 @@ Final F-score on the validation data: 0.7182
 </tr>
 <tr>
 <td style="text-align:center">F-score</td>
-<td style="text-align:center">0.3599</td>
+<td style="text-align:center">0.2917</td>
 <td style="text-align:center">0.7182</td>
 <td style="text-align:center">0.7182</td>
 </tr>
@@ -14352,7 +14352,7 @@ Final F-score on the validation data: 0.7182
 <li>特征1:workclass（劳动类型）。通常一个人的职业跟他的收入有很大的关系，比如说公务员，或者是从来没有工作的人，他的收入通常是不会超过\$50,000的。</li>
 <li>特征2:education_level（受教育程度）。通常情况下，高学历人群的工资水平要高于低学历的人人群。</li>
 <li>特征3:occupation（职业领域）。职业领域不同，工资水平，通常会有很大的区别，比如说IT和金融从业人员的工资水平会比较高。</li>
-<li>特征4:relationship（家庭情况）。如果是是有孩子的家庭，通常会更有爱心和同情心一些。</li>
+<li>特征4:年龄（家庭情况）。通常年龄跟收入有很大的关系，通常情况下，随着年龄的增长收入会增多，最终趋于稳定。</li>
 <li>特征5:sex（性别）。通常情况下，女性的收入要低于男性，因为女性有一部分精力在孩子和家庭身上，因此更多的机会留给了男性。</li>
 </ul>
 
